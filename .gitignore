@@ -39,5 +39,5 @@ Thumbs.db
 # Node #
 ######################
 node_modules/
-dist/
-.sass-cache
+**/dist/*
+**/.sass-cache/*
