@@ -1,1 +1,3 @@
-hello this is the main script
+window.onload = function() {
+	console.log('This is a JSHint demo');
+};

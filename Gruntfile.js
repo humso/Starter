@@ -13,9 +13,8 @@ module.exports = function(grunt) {
     // image optimisation - imagemin – Done
     // compile imagemin – Done
 
-    // js hint - A Static Code Analysis Tool for JavaScript
-    // js qunit - A JavaScript Unit Testing framework
-    // js concat - concatenate the source files to create a one single file
+    // js hint - A Static Code Analysis Tool for JavaScript – Done, better to have it for Atom
+    // js concat - concatenate the source files to create a one single file – Done
     // js uglify - minify js code
 
     // Something that would be nice to know…
@@ -29,9 +28,11 @@ module.exports = function(grunt) {
     app: {
       scss_src:     'src/scss',
       img_src:      'src/images',
-      js_src:       'src/js/',
-      assets_dest:  'dist/assets'
+      js_src:       'src/js',
+      assets_dest:  'dist/assets',
+      banner:       '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */'
     },
+
 
     // Compile Sass
     sass: {
@@ -79,22 +80,37 @@ module.exports = function(grunt) {
       // concatenate javascript from the plugins folder
       concat: {
         options: {
-          stripBanners: true,
-          banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */',
+          stripBanners: false,
+          banner: '<%= app.banner %>',
         },
         dist: {
-          src: ['<%= app.js_src %>plugins/*.js', '<%= app.js_src %>*.js' ],
-          dest: 'dist/scripts.js',
+          src: ['<%= app.js_src %>/plugins/*.js', '<%= app.js_src %>/*.js' ],
+          dest: '<%= app.assets_dest %>/scripts.js'
+        }
+      },
+
+      // uglify
+      uglify: {
+        options: {
+          banner: '<%= app.banner %>'
+        },
+        dist: {
+          files: [{
+            expand: true,
+            cwd: '<%= app.assets_dest %>',
+            src: '**/*.js',
+            dest: '<%= app.assets_dest %>'
+          }]
         }
       },
 
 
       // Watch files when you type grunt watch on terminal
       watch: {
-      //   scripts: {
-      //     files: ['<%= app.js_src %>/*.js'],
-      //     tasks: ['concat']
-      //   },
+        scripts: {
+          files: ['<%= app.js_src %>/*.js'],
+          tasks: ['concat']
+        },
         styles: {
           files: [ '<%= app.scss_src %>/**/*.scss'],
           tasks: [ 'sass' ]
@@ -114,10 +130,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Builds with default and distribution configurations
   grunt.registerTask('default', ['watch']);
-  grunt.registerTask('dist', ['sass:dist', 'cssmin:dist', 'imagemin:dist', 'concat:dist']);
+  grunt.registerTask('dist', ['sass:dist', 'cssmin:dist', 'imagemin:dist', 'concat:dist', 'uglify:dist']);
 
 };
