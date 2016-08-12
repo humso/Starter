@@ -3,26 +3,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // package.json https://www.npmjs.com/package/npm-check-updates
-    // package.json Simply change every dependency's version to *, then run npm update --save.
-
-    // Compile sass – Done
-    // Minify css – *might need to remove the .min for shopify – Done
-    // Create a destribution task – Done
-
-    // image optimisation - imagemin – Done
-    // compile imagemin – Done
-
-    // js hint - A Static Code Analysis Tool for JavaScript – Done, better to have it for Atom
-    // js concat - concatenate the source files to create a one single file – Done
-    // js uglify - minify js code
-
-    // Something that would be nice to know…
-    // browser reload – Live CSS reload &amp; Browser Syncing
-    // Minify HTML
-    // Minify SVG
-    // Gzip – Compress files and folders
-
 
     // Set up variables for app source and app destination
     app: {
@@ -77,19 +57,20 @@ module.exports = function(grunt) {
         }
       },
 
-      // concatenate javascript from the plugins folder
+      // Concatenate javascript from the plugins folder
+      // Also possible to select the order of the files
       concat: {
         options: {
           stripBanners: false,
           banner: '<%= app.banner %>',
         },
         dist: {
-          src: ['<%= app.js_src %>/plugins/*.js', '<%= app.js_src %>/*.js' ],
+          src: ['<%= app.js_src %>/plugins/*.js', '<%= app.js_src %>/scripts.js' ],
           dest: '<%= app.assets_dest %>/scripts.js'
         }
       },
 
-      // uglify
+      // Uglify - a JavaScript parser/compressor/beautifier
       uglify: {
         options: {
           banner: '<%= app.banner %>'
@@ -105,7 +86,8 @@ module.exports = function(grunt) {
       },
 
 
-      // Watch files when you type grunt watch on terminal
+      // Watch magic when you type grunt watch in the terminal
+      // Also possible to reload the browser
       watch: {
         scripts: {
           files: ['<%= app.js_src %>/*.js'],
@@ -119,9 +101,26 @@ module.exports = function(grunt) {
           files: [ '<%= app.img_src %>/*.{png,jpg,gif'],
           tasks: [ 'newer:imagemin' ]
         }
+      },
+
+      // NOdemon watch our node server for changes
+      nodemon: {
+        dev: {
+          script: 'server.js'
+        }
+      },
+
+      // concurrent run watch and nodemon at the same time
+      concurrent: {
+        options: {
+          logConcurrentOutput: true
+        },
+        tasks: ['nodemon', 'watch']
       }
 
+
   });
+
 
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -130,9 +129,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-browser-sync');
 
-  // Builds with default and distribution configurations
-  grunt.registerTask('default', ['watch']);
+
+  // Builds with default configuration only for development
+  grunt.registerTask('default', ['concurrent']);
+  // Builds with minified, compressed configuration for distribution
   grunt.registerTask('dist', ['sass:dist', 'cssmin:dist', 'imagemin:dist', 'concat:dist', 'uglify:dist']);
+  // Need a new build to compress a dist folder to Gzip
+  // grunt.registerTask('gzip', [''])
 
 };
