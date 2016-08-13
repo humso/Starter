@@ -5,22 +5,16 @@
   "author": "Humso",
   "url": "http://www.humso./com",
   "license": "UNLICENSED",
-  "repository": "/",
+  "repository": "https://github.com/humso/Starter.git",
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-browser-sync": "^2.2.0",
-    "grunt-concurrent": "^2.3.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^1.0.1",
     "grunt-contrib-imagemin": "^1.0.1",
-    "grunt-contrib-jshint": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
-    "grunt-express": "^1.4.1",
-    "grunt-express-server": "^0.5.3",
-    "grunt-imageoptim": "^1.4.1",
-    "grunt-newer": "^1.2.0",
-    "grunt-nodemon": "^0.4.2"
+    "grunt-newer": "^1.2.0"
   }
 }

@@ -16,5 +16,5 @@
 - js hint - A Static Code Analysis Tool for JavaScript – Done, prefer to have it for Atom
 - js concat - concatenate the source files to create a one single file – Done
 - js uglify - minify js code – Done
-- Browser reload – Live CSS reload &amp; Browser Syncing
+- Browser Sync – Live CSS reload &amp; Browser Syncing – Done
 - Gzip – Compress files and folders

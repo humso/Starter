@@ -103,19 +103,16 @@ module.exports = function(grunt) {
         }
       },
 
-      // NOdemon watch our node server for changes
-      nodemon: {
-        dev: {
-          script: 'server.js'
-        }
-      },
 
-      // concurrent run watch and nodemon at the same time
-      concurrent: {
-        options: {
-          logConcurrentOutput: true
+      // Live CSS Reload & Browser Syncing
+      browserSync: {
+        dist: {
+          src : ['dist/assets/*.css']
         },
-        tasks: ['nodemon', 'watch']
+        options: {
+          watchTask: true,
+          server: './'
+        }
       }
 
 
@@ -129,13 +126,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-nodemon');
-  grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-browser-sync');
 
 
   // Builds with default configuration only for development
-  grunt.registerTask('default', ['concurrent']);
+  grunt.registerTask('default', ['browserSync', 'watch']);
   // Builds with minified, compressed configuration for distribution
   grunt.registerTask('dist', ['sass:dist', 'cssmin:dist', 'imagemin:dist', 'concat:dist', 'uglify:dist']);
   // Need a new build to compress a dist folder to Gzip
