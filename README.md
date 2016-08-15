@@ -17,7 +17,6 @@
 - js concat - concatenate the source files to create a one single file – Done
 - js uglify - minify js code – Done
 - Browser Sync – Live CSS reload &amp; Browser Syncing – Done
-- Gzip – Compress files and folders
-
+- Gzip – Compress files and folders - Done
 - Sass with smacss - Done
 - Sass grid - Done

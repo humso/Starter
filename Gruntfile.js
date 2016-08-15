@@ -10,7 +10,8 @@ module.exports = function(grunt) {
       img_src:      'src/images',
       js_src:       'src/js',
       assets_dest:  'dist/assets',
-      banner:       '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      banner:       '/*! <%= pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %> */',
+      archive:      '<%= pkg.name %>-v<%= pkg.version %>'
     },
 
 
@@ -107,14 +108,27 @@ module.exports = function(grunt) {
       // Live CSS Reload & Browser Syncing
       browserSync: {
         dist: {
-          src : ['dist/assets/*.css']
+          src : ['<%= app.assets_dest %>/*.css', 'index.html']
         },
         options: {
           watchTask: true,
           server: './'
         }
-      }
+      },
 
+
+      // Compress Files, mainly for a Shopify project
+      compress: {
+        main: {
+          options: {
+            archive: '<%= app.archive %>.zip'
+          },
+          expand: true,
+          cwd: 'dist',
+          src: ['**/*'],
+          dest: ''
+        }
+      }
 
   });
 
@@ -127,13 +141,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-browser-sync');
+  grunt.loadNpmTasks('grunt-contrib-compress');
 
 
   // Builds with default configuration only for development
   grunt.registerTask('default', ['browserSync', 'watch']);
   // Builds with minified, compressed configuration for distribution
-  grunt.registerTask('dist', ['sass:dist', 'cssmin:dist', 'imagemin:dist', 'concat:dist', 'uglify:dist']);
-  // Need a new build to compress a dist folder to Gzip
-  // grunt.registerTask('gzip', [''])
-
+  grunt.registerTask('dist', ['sass', 'cssmin', 'imagemin', 'concat', 'uglify']);
+  
 };
