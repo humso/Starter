@@ -18,3 +18,6 @@
 - js uglify - minify js code – Done
 - Browser Sync – Live CSS reload &amp; Browser Syncing – Done
 - Gzip – Compress files and folders
+
+- Sass with smacss - Done
+- Sass grid - Done

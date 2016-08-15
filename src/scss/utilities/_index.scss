@@ -1,8 +1,8 @@
 // ==========================================================================
-// Styles
+// Utilities
 // ==========================================================================
 
-@import 'utilities/index';
-@import 'base/index';
-@import 'layout/index';
-//@import 'modules/index';
+@import 'config';
+@import 'functions';
+@import 'helpers';
+@import 'mixins';
