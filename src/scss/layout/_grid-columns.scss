@@ -18,6 +18,7 @@
 
 // Column Styles
 [class^="grid__col--"] {
+
   @media (min-width: 0px) and (max-width: 768px){
     margin-top: em(12px);
     margin-bottom: em(12px);
@@ -26,9 +27,7 @@
     @include doubly(percentage($g-gutter-width / $context));
     float: left;
     min-height: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
-    background-color: #fab;
+    // background: #fab;
     &:last-of-type {
       float: right;
     }
@@ -36,11 +35,29 @@
 }
 
 // Column overlay
-.gridset {
-  // background-color: $color-primary;
-  opacity: .5;
-  height: 100%;
 
+.grid--overlay {
+  height: 100%;
+}
+
+.grid__col--overlay {
+  padding-top: 8px;
+  opacity: .4;
+  color: $color-primary;
+  text-align: center;
+  font-size: 10px;
+  text-transform: uppercase;
   border-right: 1px solid $color-primary;
   border-left: 1px solid $color-primary;
+  font-weight: 700;
+  height: 100%;
+}
+
+.grid__col--overlay small {
+  border-bottom: 1px solid;
+  width: 100%;
+  display: block;
+  padding-top: 12px;
+  padding-bottom: 18px;
+  line-height: 0;
 }
