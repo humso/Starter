@@ -20,3 +20,6 @@
 - Gzip – Compress files and folders - Done
 - Sass with smacss - Done
 - Sass grid - Done
+- Grid toggle with js
+
+- todo: load grid html with js so the page only loads content when needed
