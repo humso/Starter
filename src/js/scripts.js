@@ -1,6 +1,8 @@
-window.onload = function() {
+// Is js working?
+
+$(function() {
 	console.log('JS is working');
-};
+});
 
 
 
@@ -13,23 +15,27 @@ $(function() {
 		return function() {
 			if(!on) {
 				on = true;
-				// Do stuff if ON
-				console.log("click on");
-				$(".grid--overlay").addClass("hide");
+				// Do stuff if OFF
+				console.log("click off");
+				$(".grid--overlay").remove();
 				return;
 			}
-			// Do stuff if OFF
-			console.log("click off");
-			$(".grid--overlay").removeClass("hide");
+			// Do stuff if ON
+			console.log("click on");
+			$("body").append(' <div class="grid grid--overlay"></div>');
+			for (var i = 1; i <= 12; i+=1) {
+				$(".grid--overlay").append(' <div class="grid__col--1 grid__col--overlay"><small>col'+ i +'</small></div>');
+			}
 			on = false;
 		};
 	}();
 
-	toggle(); // Set OFF as default
+	// Set OFF as default
+	toggle();
 
-	document.addEventListener('keydown', function(e) {
-		var key = e.keycode || e.which;
-		if (key === 71) {
+	document.addEventListener('keydown', function(event) {
+		var key = event.keycode || event.which;
+		if (key === 71) { // if key === g
 			toggle();
 		}
 	}, false);
