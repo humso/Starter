@@ -11,12 +11,14 @@
 ## Learning
 - Compile sass – Done
 - Minify css – Done
-- Create a destribution task – Done
-- Compile imagemin – Done
-- js hint - A Static Code Analysis Tool for JavaScript – Done, prefer to have it for Atom
-- js concat - concatenate the source files to create a one single file – Done
-- js uglify - minify js code – Done
+- Create a distribution task – Done
+- Compile Imagemin – Done
+- JS hint - A Static Code Analysis Tool for JavaScript – Done, prefer to have it for Atom
+- JS concat - concatenate the source files to create a one single file – Done
+- JS uglify - minify JS code – Done
 - Browser Sync – Live CSS reload &amp; Browser Syncing – Done
 - Gzip – Compress files and folders - Done
-- Sass with smacss - Done
+- Sass with SMACSS - Done
 - Sass grid - Done
+- Grid toggle with JS - Done
+- Load the grid overlay on request with JS - Done
