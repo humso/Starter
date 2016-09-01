@@ -1,8 +1,6 @@
 // ==========================================================================
-// Styles
+// States
 // ==========================================================================
 
-@import 'utilities/index';
-@import 'base/index';
-@import 'layout/index';
-@import 'states/index';
+@import 'collapsed';
+@import 'grid-display';
