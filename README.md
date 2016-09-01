@@ -22,3 +22,4 @@
 - Sass grid - Done
 - Grid toggle with JS - Done
 - Load the grid overlay on request with JS - Done
+- Update media queries on SCSS - Done

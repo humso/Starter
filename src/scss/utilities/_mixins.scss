@@ -45,11 +45,53 @@
 }
 
 
+// Media queries
+
+@mixin mq($break) {
+  @if $break == "small" {
+    @media (min-width: $breakpoint-sm) and (max-width: $breakpoint-md) {
+      @content;
+    }
+  }
+  @else if $break == "medium" {
+    @media (min-width: $breakpoint-md + 1) {
+      @content;
+    }
+  }
+  @else if $break == "large" {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+  @else {
+    @error "Whoops! No value could be retrieved for `#{$break}`."
+  }
+}
+
+
+
 
 // Adjacent sibling margins
+
 @mixin doubly($margin: 1em) {
   & + & {
     margin-left: $margin;
     @content;
+  }
+}
+
+
+// Grid columns
+
+@mixin g-columns {
+  @for $i from 1 through $g-col-count {
+
+    $context: g-context($g-col-width, $g-col-count, $g-gutter-width) !global;
+    $target: ($g-col-width * $i) + ($g-gutter-width * ($i - 1));
+
+    // generate column modifier classes
+    &--#{$i} {
+      width: percentage($target / $context);
+    }
   }
 }
