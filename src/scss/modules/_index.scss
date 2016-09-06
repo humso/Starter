@@ -1,9 +1,9 @@
 // ==========================================================================
-// Styles
+// Placeholder selectors
 // ==========================================================================
 
-@import 'utilities/index';
-@import 'base/index';
-@import 'layout/index';
-@import 'modules/index';
-@import 'states/index';
+
+@import 'extends';
+@import 'headlines';
+@import 'buttons';
+@import 'offcanvas';

@@ -2,32 +2,7 @@
 // Mixins
 // ==========================================================================
 
-// Image replace
-@mixin image-replace($img, $w, $h, $disp: block) {
-  background-image: url('#{$path--rel}/#{img}');
-  background-repeat: no-repeat;
-  width: $w;
-  height: $h;
-  display: $disp;
-}
 
-@mixin p-el(
-  $el,
-  $el-w: null,
-  $el-h: null) {
-
-    @if $el == "before" or $el == "after" {
-      &:#{$el} {
-        @extend %pseudos;
-        width: $el-w;
-        height: $el-h;
-        @content;
-      }
-    }
-    @else {
-      @warn "'#{$el}' is not a valid pseudo-element.";
-    }
-}
 
 
 // BEM selectors
@@ -43,6 +18,8 @@
     @content;
   }
 }
+
+
 
 
 // Media queries
@@ -64,8 +41,62 @@
     }
   }
   @else {
-    @error "Whoops! No value could be retrieved for `#{$break}`."
+    @error "Whoops! No value could be retrieved for `#{$break}`.";
   }
+}
+
+
+
+
+// Generate modifier color classes
+
+@mixin ui-colors($map, $p-el:null) {
+  @each $theme, $color in $map {
+    @include m($theme) {
+      background-color: $color;
+
+      // If an $p-el value is passed, generate pseudo-element bg colors. Used on progbars.
+      @if $p-el {
+        &:after {
+          background-color: lighten($color, 8%);
+        }
+      }
+    }
+  }
+}
+
+
+
+
+// Generating :before or :after pseudo-element shapes
+
+@mixin p-el(
+  $el,
+  $el-w: null,
+  $el-h: null) {
+    @if $el == "before" or $el == "after" {
+      &:#{$el} {
+        @extend %pseudos;
+        width: $el-w;
+        height: $el-h;
+        @content;
+      }
+    }
+    @else {
+      @error "`#{$el}` is not a valid pseudo-element.";
+    }
+  }
+
+
+
+
+// Image replacement
+@mixin image-replace($img, $w, $h, $disp: block) {
+  background-image: url('#{$path--rel}/#{img}');
+  background-repeat: no-repeat;
+  width: $w;
+  height: $h;
+  display: $disp;
 }
 
 
