@@ -66,7 +66,7 @@ module.exports = function(grunt) {
           banner: '<%= app.banner %>',
         },
         dist: {
-          src: ['<%= app.js_src %>/plugins/*.js', '<%= app.js_src %>/scripts.js' ],
+          src: ['<%= app.js_src %>/*.js', '<%= app.js_src %>/scripts.js' ],
           dest: '<%= app.assets_dest %>/scripts.js'
         }
       },
@@ -148,5 +148,5 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['browserSync', 'watch']);
   // Builds with minified, compressed configuration for distribution
   grunt.registerTask('dist', ['sass', 'cssmin', 'imagemin', 'concat', 'uglify']);
-  
+
 };
