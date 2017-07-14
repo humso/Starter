@@ -97,7 +97,7 @@ module.exports = function(grunt) {
         // Penthouse
         penthouse: {
             extract : {
-                outfile : 'dist/assets/out.css',
+                outfile : 'dist/assets/styles_critical_home.css',
                 css : 'dist/assets/styles.css',
                 url : 'http://localhost:3000',
                 width : 1300,
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
             },
             styles: {
                 files: ['<%= app.scss_src %>/**/*.scss'],
-                tasks: ['sass']
+                tasks: ['sass', 'penthouse']
             },
             images: {
                 files: ['<%= app.img_src %>/*.{png,jpg,gif'],
